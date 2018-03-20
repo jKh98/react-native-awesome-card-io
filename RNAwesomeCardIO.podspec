@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license            = package["license"]
   s.homepage           = 'n/a'
   s.authors            = { package["author"] => package["author"] }
-  s.source             = { :git => "https://github.com/Kerumen/react-native-awesome-card-io" }
+  s.source             = { :git => "https://github.com/Skyscanner/react-native-awesome-card-io" }
   s.source_files       = ['ios/*.{h,m}', 'ios/CardIO/*.h']
   s.platform           = :ios, "8.0"
   s.frameworks         = 'Accelerate', 'AVFoundation', 'AudioToolbox', 'CoreMedia', 'CoreVideo', 'MobileCoreServices', 'OpenGLES', 'QuartzCore', 'Security', 'UIKit'
