@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.frameworks         = "Accelerate", "AVFoundation", "AudioToolbox", "CoreMedia", "CoreVideo", "MobileCoreServices", "OpenGLES", "QuartzCore", "Security", "UIKit"
   s.libraries          = "c++"
   s.vendored_libraries = "ios/CardIO/libCardIO.a", "ios/CardIO/libopencv_core.a", "ios/CardIO/libopencv_imgproc.a"
-  s.dependency          "React"
+  s.dependency           "React"
 end
