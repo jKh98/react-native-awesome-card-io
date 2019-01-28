@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license            = package["license"]
   s.homepage           = package["repository"]["url"]
   s.authors            = { package["author"]["name"] => package["author"]["email"] }
-  s.source             = { :git => s.homepage, :tag => "#v{s.version}" }
+  s.source             = { :git => s.homepage, :tag => "v#{s.version}" }
   s.source_files       = ["ios/*.{h,m}", "ios/CardIO/*.h"]
   s.platform           = :ios, "8.0"
   s.frameworks         = "Accelerate", "AVFoundation", "AudioToolbox", "CoreMedia", "CoreVideo", "MobileCoreServices", "OpenGLES", "QuartzCore", "Security", "UIKit"
