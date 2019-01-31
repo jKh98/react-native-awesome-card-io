@@ -21,7 +21,10 @@
     "android",
     "ios"
   ],
-  "author": "Yann Pringault <yann.pringault@gmail.com>",
+  "author": {
+    "name": "Yann Pringault",
+    "email": "yann.pringault@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "prop-types": "^15.5.10"
