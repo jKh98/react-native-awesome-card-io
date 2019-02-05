@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.summary            = package["description"]
   s.requires_arc       = true
   s.license            = package["license"]
-  s.homepage           = package["repository"]["url"]
+  s.homepage           = package["homepage"]
   s.authors            = { package["author"]["name"] => package["author"]["email"] }
   s.source             = { :git => s.homepage, :tag => "v#{s.version}" }
   s.source_files       = ["ios/*.{h,m}", "ios/CardIO/*.h"]
