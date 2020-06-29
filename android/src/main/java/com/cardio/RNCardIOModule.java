@@ -110,6 +110,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
       String image = data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE);
       res.putString("image",image);
+      promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
       CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
