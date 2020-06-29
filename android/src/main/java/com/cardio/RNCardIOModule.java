@@ -42,7 +42,6 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     scanIntent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE,true);
     scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_RESULT, true);
-    
     parseConfig(config, scanIntent);
     if (activity != null) {
       activity.startActivityForResult(scanIntent, CARD_IO_SCAN);
