@@ -13,17 +13,20 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 
+
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 public class RNCardIOModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
   public static final int CARD_IO_SCAN = 1;
+  private ReactApplicationContext mReactContext;
 
   private Promise promise;
 
   public RNCardIOModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    mReactContext = reactContext;
     reactContext.addActivityEventListener(this);
   }
 
@@ -109,7 +112,22 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      res.putString("image",data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE));
+      Bitmap resultCard = CardIOActivity.getCapturedCardImage(data);
+        ContextWrapper wrapper = new ContextWrapper(mReactContext);
+        File newImageFile = wrapper.getDir("images",0);
+        newImageFile = new File(newImageFile, "detectedCardImage"+ ".jpg");
+        try {
+            OutputStream outputStream = new FileOutputStream(newImageFile);
+            resultCard.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+      res.putString("scannedImagePath", newImageFile.getAbsolutePath());
       promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
