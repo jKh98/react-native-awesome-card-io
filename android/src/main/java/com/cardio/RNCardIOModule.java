@@ -106,13 +106,13 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     if (requestCode != CARD_IO_SCAN) {
       return;
     }
+    WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
       String image = data.getStringExtra(scanResult.EXTRA_CAPTURED_CARD_IMAGE);
       res.putString("image",image);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
       CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
-      WritableMap res = Arguments.createMap();
       res.putString("cardType", scanResult.getCardType().getDisplayName(data.getStringExtra(CardIOActivity.EXTRA_LANGUAGE_OR_LOCALE)));
       res.putString("cardNumber", scanResult.cardNumber);
       res.putString("redactedCardNumber", scanResult.getRedactedCardNumber());
