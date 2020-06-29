@@ -108,7 +108,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      String image = data.getStringExtra(scanResult.EXTRA_CAPTURED_CARD_IMAGE);
+      String image = data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE);
       res.putString("image",image);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
