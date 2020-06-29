@@ -108,9 +108,8 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      String image = data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE);
-      res.putString("image",image);
-      promise.resolve(res);
+      res.putString("image",data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE));
+      promise.resolve(data);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
       CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
