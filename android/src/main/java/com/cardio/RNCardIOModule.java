@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import android.util.Base64;
+import java.io.ByteArrayOutputStream;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
@@ -128,6 +129,10 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
         try {
             OutputStream outputStream = new FileOutputStream(newImageFile);
             resultCard.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
+            resultCard.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
             outputStream.flush();
