@@ -40,6 +40,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE,true);
+    scanIntent.putExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, true);
     parseConfig(config, scanIntent);
     if (activity != null) {
@@ -108,8 +109,8 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      // res.putString("image",data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE));
-      promise.resolve(data);
+      res.putString("image",data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE));
+      promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
       CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
