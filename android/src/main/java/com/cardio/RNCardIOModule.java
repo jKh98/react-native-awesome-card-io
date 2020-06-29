@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import android.util.Base64;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
@@ -122,10 +123,13 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
       Bitmap resultCard = CardIOActivity.getCapturedCardImage(data);
         ContextWrapper wrapper = new ContextWrapper(mReactContext);
         File newImageFile = wrapper.getDir("images",0);
+        String encoded ="";
         newImageFile = new File(newImageFile, "detectedCardImage"+ ".jpg");
         try {
             OutputStream outputStream = new FileOutputStream(newImageFile);
             resultCard.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
             outputStream.flush();
             outputStream.close();
 
@@ -135,6 +139,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             e.printStackTrace();
         }
       res.putString("scannedImagePath", newImageFile.getAbsolutePath());
+      res.putString("base64", encoded);
       promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
