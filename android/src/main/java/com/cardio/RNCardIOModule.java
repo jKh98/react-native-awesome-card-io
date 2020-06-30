@@ -123,7 +123,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
         String encoded ="";
         try { 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
-            resultCard.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+            resultCard.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
             byteArrayOutputStream.flush();
@@ -132,6 +132,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             e.printStackTrace();
         }
       res.putString("base64", encoded);
+      res.putString("captured", data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE))
       promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
