@@ -122,21 +122,13 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
       Bitmap resultCard = CardIOActivity.getCapturedCardImage(data);
-        ContextWrapper wrapper = new ContextWrapper(mReactContext);
-        File newImageFile = wrapper.getDir("images",0);
         String encoded ="";
-        newImageFile = new File(newImageFile, "detectedCardImage"+ ".jpg");
-        try {
-            OutputStream outputStream = new FileOutputStream(newImageFile);
-            resultCard.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
+        try { 
             resultCard.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-            outputStream.flush();
-            outputStream.close();
+            byteArrayOutputStream.flush();
+            byteArrayOutputStream.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
