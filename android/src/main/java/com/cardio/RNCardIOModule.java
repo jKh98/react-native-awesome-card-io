@@ -132,7 +132,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             e.printStackTrace();
         }
       res.putString("base64", encoded);
-      res.putString("captured", data.getStringExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE));
+      res.putString("bitmap", resultCard);
       promise.resolve(res);
     }
     if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
