@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
@@ -131,8 +132,8 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
 
             ByteBuffer buffer = ByteBuffer.allocate(resultCard.getRowBytes() *resultCard.getHeight());
             resultCard.copyPixelsToBuffer(buffer);
-            byte[] data = buffer.array();
-            encoded = Base64.encodeToString(data, Base64.DEFAULT);
+            byte[] bytes = buffer.array();
+            encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
 
         } catch (Exception e) {
             e.printStackTrace();
