@@ -125,7 +125,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
             resultCard.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();
-            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
             byteArrayOutputStream.flush();
             byteArrayOutputStream.close();
         } catch (Exception e) {
