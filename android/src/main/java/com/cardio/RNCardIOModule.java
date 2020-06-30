@@ -120,7 +120,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      Bitmap c = CardIOActivity.getCapturedCardImage(data);
+      Bitmap bitmap = CardIOActivity.getCapturedCardImage(data);
         String encoded ="";
         try { 
             // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
@@ -130,10 +130,12 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             // byteArrayOutputStream.flush();
             // byteArrayOutputStream.close();
 
-            ByteBuffer buffer = ByteBuffer.allocate(resultCard.getRowBytes() *resultCard.getHeight());
-            resultCard.copyPixelsToBuffer(buffer);
-            byte[] bytes = buffer.array();
-            encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
+             ByteBuffer buffer = 
+                ByteBuffer.allocate(bitmap.getRowBytes() * 
+                bitmap.getHeight());
+                bitmap.copyPixelsToBuffer(buffer);
+                byte[] data = buffer.array();
+                encoded =  Base64.encodeToString(data, Base64.DEFAULT);
 
         } catch (Exception e) {
             e.printStackTrace();
