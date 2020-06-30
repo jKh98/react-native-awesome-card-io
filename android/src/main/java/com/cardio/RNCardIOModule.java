@@ -123,20 +123,12 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
       Bitmap bitmap = CardIOActivity.getCapturedCardImage(data);
         String encoded ="";
         try { 
-            // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
-            // resultCard.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
-            // byte[] byteArray = byteArrayOutputStream .toByteArray();
-            // encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-            // byteArrayOutputStream.flush();
-            // byteArrayOutputStream.close();
-
-             ByteBuffer buffer = 
-                ByteBuffer.allocate(bitmap.getRowBytes() * 
-                bitmap.getHeight());
-                bitmap.copyPixelsToBuffer(buffer);
-                byte[] bytes = buffer.array();
-                encoded =  Base64.encodeToString(bytes, Base64.DEFAULT);
-
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
+            resultCard.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            byteArrayOutputStream.flush();
+            byteArrayOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
