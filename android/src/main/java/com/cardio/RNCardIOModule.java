@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
@@ -120,7 +119,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      Bitmap bitmap = CardIOActivity.getCapturedCardImage(data);
+      Bitmap resultCard = CardIOActivity.getCapturedCardImage(data);
         String encoded ="";
         try { 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
