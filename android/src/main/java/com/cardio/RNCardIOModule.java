@@ -119,15 +119,21 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     }
     WritableMap res = Arguments.createMap();
     if (data!=null &&  data.hasExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE)){
-      Bitmap resultCard = CardIOActivity.getCapturedCardImage(data);
+      Bitmap c = CardIOActivity.getCapturedCardImage(data);
         String encoded ="";
         try { 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
-            resultCard.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream .toByteArray();
-            encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-            byteArrayOutputStream.flush();
-            byteArrayOutputStream.close();
+            // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
+            // resultCard.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+            // byte[] byteArray = byteArrayOutputStream .toByteArray();
+            // encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            // byteArrayOutputStream.flush();
+            // byteArrayOutputStream.close();
+
+            ByteBuffer buffer = ByteBuffer.allocate(resultCard.getRowBytes() *resultCard.getHeight());
+            resultCard.copyPixelsToBuffer(buffer);
+            byte[] data = buffer.array();
+            encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
