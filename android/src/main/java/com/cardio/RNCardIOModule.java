@@ -4,12 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Bitmap;
-import android.content.ContextWrapper;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
@@ -49,8 +43,11 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
     this.promise = promise;
     Activity activity = getCurrentActivity();
     Intent scanIntent = new Intent(activity, CardIOActivity.class);
-    scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true);
-    scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true);
+    scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, false);
+    scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false);
+    scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, true);
+    scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_INSTRUCTIONS, true);
+    scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_CONFIRMATION, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE,true);
     scanIntent.putExtra(CardIOActivity.EXTRA_CAPTURED_CARD_IMAGE, true);
     scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, true);
@@ -129,10 +126,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
             byteArrayOutputStream.flush();
             byteArrayOutputStream.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
       res.putString("scannedImagePath", newImageFile.getAbsolutePath());
