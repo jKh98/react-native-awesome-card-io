@@ -132,7 +132,7 @@ public class RNCardIOModule extends ReactContextBaseJavaModule implements Activi
             ByteBuffer buffer = ByteBuffer.allocate(resultCard.getRowBytes() *resultCard.getHeight());
             resultCard.copyPixelsToBuffer(buffer);
             byte[] data = buffer.array();
-            encoded = Base64.encodeToString(bytes, Base64.DEFAULT);
+            encoded = Base64.encodeToString(data, Base64.DEFAULT);
 
         } catch (Exception e) {
             e.printStackTrace();
